@@ -6344,7 +6344,7 @@ spawn(function()
                                 repeat
                                     task.wait()
                                     AutoHaki()
-                                    EquipWeapon(_G.SelectWeapon)
+                                    EquipWeapon(_G['Select Weapon'])
                                     rootPart.CanCollide = false
                                     humanoid.WalkSpeed = 0
                                     TP(rootPart.CFrame * Pos)
@@ -6384,7 +6384,7 @@ spawn(function()
                                 repeat
                                     task.wait()
                                     AutoHaki()
-                                    EquipWeapon(_G.SelectWeapon)
+                                    EquipWeapon(_G['Select Weapon'])
                                     rootPart.CanCollide = false
                                     humanoid.WalkSpeed = 0
                                     TP(rootPart.CFrame * Pos)
@@ -10620,7 +10620,7 @@ spawn(function()
                                 repeat
                                     task.wait()
                                     AutoHaki()
-                                    EquipWeapon(_G.SelectWeapon)
+                                    EquipWeapon(_G['Select Weapon'])
                                     rootPart.CanCollide = false
                                     humanoid.WalkSpeed = 0
                                     TP(rootPart.CFrame * Pos)
@@ -10650,7 +10650,7 @@ spawn(function()
                                 repeat
                                     task.wait()
                                     AutoHaki()
-                                    EquipWeapon(_G.SelectWeapon)
+                                    EquipWeapon(_G['Select Weapon'])
                                     rootPart.CanCollide = false
                                     humanoid.WalkSpeed = 0
                                     TP(rootPart.CFrame * Pos)
@@ -10680,7 +10680,7 @@ spawn(function()
                                 repeat
                                     task.wait()
                                     AutoHaki()
-                                    EquipWeapon(_G.SelectWeapon)
+                                    EquipWeapon(_G['Select Weapon'])
                                     rootPart.CanCollide = false
                                     humanoid.WalkSpeed = 0
                                     TP(rootPart.CFrame * Pos)
