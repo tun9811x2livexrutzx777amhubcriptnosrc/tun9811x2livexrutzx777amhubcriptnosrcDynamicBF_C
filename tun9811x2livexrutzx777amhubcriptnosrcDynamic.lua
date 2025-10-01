@@ -6347,7 +6347,7 @@ spawn(function()
                                     EquipWeapon(_G.SelectWeapon)
                                     rootPart.CanCollide = false
                                     humanoid.WalkSpeed = 0
-                                    toposition(rootPart.CFrame * Pos)
+                                    TP(rootPart.CFrame * Pos)
                                     sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
                                 until not getgenv().Config["Auto Twin Hooks"] or not v.Parent or humanoid.Health <= 0
                             end
@@ -6387,7 +6387,7 @@ spawn(function()
                                     EquipWeapon(_G.SelectWeapon)
                                     rootPart.CanCollide = false
                                     humanoid.WalkSpeed = 0
-                                    toposition(rootPart.CFrame * Pos)
+                                    TP(rootPart.CFrame * Pos)
                                     sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
                                 until not getgenv().Config["Auto Twin Hooks"] or not v.Parent or humanoid.Health <= 0
                             end
@@ -10623,7 +10623,7 @@ spawn(function()
                                     EquipWeapon(_G.SelectWeapon)
                                     rootPart.CanCollide = false
                                     humanoid.WalkSpeed = 0
-                                    toposition(rootPart.CFrame * Pos)
+                                    TP(rootPart.CFrame * Pos)
                                     sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
                                 until not getgenv().Config["Auto Farm Agony"] or not v.Parent or humanoid.Health <= 0
                             end
@@ -10653,7 +10653,7 @@ spawn(function()
                                     EquipWeapon(_G.SelectWeapon)
                                     rootPart.CanCollide = false
                                     humanoid.WalkSpeed = 0
-                                    toposition(rootPart.CFrame * Pos)
+                                    TP(rootPart.CFrame * Pos)
                                     sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
                                 until not getgenv().Config["Auto Farm Ashen"] or not v.Parent or humanoid.Health <= 0
                             end
@@ -10683,7 +10683,7 @@ spawn(function()
                                     EquipWeapon(_G.SelectWeapon)
                                     rootPart.CanCollide = false
                                     humanoid.WalkSpeed = 0
-                                    toposition(rootPart.CFrame * Pos)
+                                    TP(rootPart.CFrame * Pos)
                                     sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
                                 until not getgenv().Config["Auto Farm Lightning Bandit"] or not v.Parent or humanoid.Health <= 0
                             end
