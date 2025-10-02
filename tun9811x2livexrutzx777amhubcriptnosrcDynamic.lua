@@ -10841,8 +10841,9 @@ window.Destroying:Connect(function()
             game:GetService("CoreGui"):FindFirstChild("ImageButton"):Destroy()
         end
         for i,v in pairs(gethui():GetChildren()) do
-            print(i,v)
+            if v.Name == "Cascade" then
             v:Destroy()
+            end
         end
     end)
 end)
