@@ -3598,7 +3598,7 @@ local function isAutoEnabled()
         "Auto Collect Berry", "Auto Godhuman Full", "Auto Electric Claw", "Auto Sharkman Karate", "Auto Twin Hooks",
         "Auto Soul Guitar", "Auto Kill Players", "Auto Complete Trail", "Auto Farm Chest [ Tweem ]", "Auto Farm Chest [ TP ] ( Risk )",
         "Auto Observation V2", "Auto Dough King V2", "Auto Farm Order Boss", "Auto Tyrant of the Skies","Enabled Farm Fast",
-        "Auto Farm Oni Soldier","Auto Farm Red Commander","Auto Fishing"
+        "Auto Farm Oni Soldier","Auto Farm Red Commander","Auto Fishing","Auto Farm Boss Event","Auto Tree Protection Event",
     }
     for _, key in ipairs(keys_G) do
         if Config[key] then return true end
@@ -10608,12 +10608,12 @@ end)
 local pos_farm_event_new = CFrame.new(42.1511803, 4643.81396, -365.322998, 0.202033624, 6.54368737e-09, -0.979378581, 5.38032774e-09, 1, 7.79136311e-09, 0.979378581, -6.8434951e-09, 0.202033624)
 spawn(function()
     while wait() do
-        if getgenv().Config["Auto Farm Agony"] then
+        if getgenv().Config["Auto Farm Boss Event"] then
             pcall(function()
                 local enemies = workspace.Enemies
-                if enemies:FindFirstChild("Agony") then
+                if enemies:FindFirstChild("Agony") or enemies:FindFirstChild("Ashen") or enemies:FindFirstChild("Lightning Bandit") then
                     for _, v in pairs(enemies:GetChildren()) do
-                        if v.Name == "Agony" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
+                        if v.Name == "Agony" or v.Name == "Ashen" or v.Name == "Lightning Bandit" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
                             local humanoid = v.Humanoid
                             local rootPart = v.HumanoidRootPart
                             if humanoid.Health > 0 then
@@ -10625,7 +10625,7 @@ spawn(function()
                                     humanoid.WalkSpeed = 0
                                     TP(rootPart.CFrame * Pos)
                                     sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                until not getgenv().Config["Auto Farm Agony"] or not v.Parent or humanoid.Health <= 0
+                                until not getgenv().Config["Auto Farm Boss Event"] or not v.Parent or humanoid.Health <= 0
                             end
                         end
                     end
@@ -10636,62 +10636,94 @@ spawn(function()
         end
     end
 end)
+local red = CFrame.new(2001.59021, 4809.39551, -225.720871, -0.0107263112, -1.97952765e-09, -0.999942482, -1.08053236e-07, 1, -8.20562174e-10, 0.999942482, 1.08038215e-07, -0.0107263112)
+local red2 = CFrame.new(-1594.7301, 4809.06787, -230.250336, -0.0725727081, 5.44843708e-08, -0.99736315, -1.36434881e-08, 1, 5.56211823e-08, 0.99736315, 1.76440906e-08, -0.0725727081)
 spawn(function()
-    while wait() do
-        if getgenv().Config["Auto Farm Ashen"] then
+    while task.wait() do
+        if getgenv().Config["Auto Tree Protection Event"] then
             pcall(function()
-                local enemies = workspace.Enemies
-                if enemies:FindFirstChild("Ashen") then
-                    for _, v in pairs(enemies:GetChildren()) do
-                        if v.Name == "Ashen" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
-                            local humanoid = v.Humanoid
-                            local rootPart = v.HumanoidRootPart
-                            if humanoid.Health > 0 then
-                                repeat
-                                    task.wait()
-                                    AutoHaki()
-                                    EquipWeapon(_G['Select Weapon'])
-                                    rootPart.CanCollide = false
-                                    humanoid.WalkSpeed = 0
-                                    TP(rootPart.CFrame * Pos)
-                                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                until not getgenv().Config["Auto Farm Ashen"] or not v.Parent or humanoid.Health <= 0
+                local spiritTree = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("SpiritTree")
+                if spiritTree then
+                    for _, barContainer in pairs(spiritTree:GetChildren()) do
+                        if barContainer.Name == "BarContainer" then
+                            for _, bg in pairs(barContainer:GetChildren()) do
+                                if bg.Name == "Background" then
+                                    if bg.Image == "rbxassetid://118983292018902" then
+                                        for _, mob in pairs(workspace.Enemies:GetChildren()) do
+                                            if (mob.Name == "Rip Infantry" or mob.Name == "Rip Legionnaire") 
+                                            and mob:FindFirstChild("Humanoid") 
+                                            and mob:FindFirstChild("HumanoidRootPart") then
+                                                local humanoid = mob.Humanoid
+                                                local rootPart = mob.HumanoidRootPart
+                                                if humanoid.Health > 0 then
+                                                    repeat
+                                                        task.wait()
+                                                        AutoHaki()
+                                                        EquipWeapon(_G['Select Weapon'])
+                                                        rootPart.CanCollide = false
+                                                        humanoid.WalkSpeed = 0
+                                                        TP(rootPart.CFrame)
+                                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                                    until not getgenv().Config["Auto Farm Tree Protection Event"] or not mob.Parent or humanoid.Health <= 0
+                                                end
+                                            else
+                                                TP(red2)
+                                            end
+                                        end
+                                    elseif bg.Image == "rbxassetid://PUT_ANOTHER_ASSET_ID_HERE" then
+                                        for _, mob in pairs(workspace.Enemies:GetChildren()) do
+                                            if (mob.Name == "Rip Infantry" or mob.Name == "Rip Legionnaire") 
+                                            and mob:FindFirstChild("Humanoid") 
+                                            and mob:FindFirstChild("HumanoidRootPart") then
+                                                local humanoid = mob.Humanoid
+                                                local rootPart = mob.HumanoidRootPart
+                                                if humanoid.Health > 0 then
+                                                    repeat
+                                                        task.wait()
+                                                        AutoHaki()
+                                                        EquipWeapon(_G['Select Weapon'])
+                                                        rootPart.CanCollide = false
+                                                        humanoid.WalkSpeed = 0
+                                                        TP(rootPart.CFrame)
+                                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                                    until not getgenv().Config["Auto Farm Tree Protection Event"] or not mob.Parent or humanoid.Health <= 0
+                                                end
+                                            else
+                                                TP(red)
+                                            end
+                                        end
+                                    end
+                                end
                             end
                         end
                     end
-                else
-                    TP(pos_farm_event_new)
                 end
             end)
         end
     end
 end)
 spawn(function()
-    while wait() do
-        if getgenv().Config["Auto Farm Lightning Bandit"] then
+    while task.wait() do
+        if getgenv().Config["Auto Tree Protection Event"] then
             pcall(function()
-                local enemies = workspace.Enemies
-                if enemies:FindFirstChild("Lightning Bandit") then
-                    for _, v in pairs(enemies:GetChildren()) do
-                        if v.Name == "Lightning Bandit" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
-                            local humanoid = v.Humanoid
-                            local rootPart = v.HumanoidRootPart
-                            if humanoid.Health > 0 then
-                                repeat
-                                    task.wait()
-                                    AutoHaki()
-                                    EquipWeapon(_G['Select Weapon'])
-                                    rootPart.CanCollide = false
-                                    humanoid.WalkSpeed = 0
-                                    TP(rootPart.CFrame * Pos)
-                                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                until not getgenv().Config["Auto Farm Lightning Bandit"] or not v.Parent or humanoid.Health <= 0
+                local spiritTree = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("SpiritTree")
+                    for _, barContainer in pairs(spiritTree:GetChildren()) do
+                        if barContainer.Name == "BarContainer" then
+                            for _, bg in pairs(barContainer:GetChildren()) do
+                                if bg.Name == "Background" then
+                                    if bg.Image == "rbxassetid://118983292018902" then
+                                        if not workspace.Enemies:FindFirstChild("Rip Infantry") or not workspace.Enemies:FindFirstChild("Rip Legionnaire") then
+                                            TP(red2)
+                                        end
+                                    elseif bg.Image == "rbxassetid://113072026424771" then
+                                        if not workspace.Enemies:FindFirstChild("Rip Infantry") or not workspace.Enemies:FindFirstChild("Rip Legionnaire") then
+                                            TP(red)
+                                        end
+                                    end
+                                end
                             end
                         end
                     end
-                else
-                    TP(pos_farm_event_new)
-                end
             end)
         end
     end
@@ -13625,31 +13657,22 @@ row:Right():Button({
     end,
 })
 form = Tabs.Events:PageSection({ Title = "Celebration" }):Form()
-row = titledRow(form, "Auto Farm Agony")
+row = titledRow(form, "Auto Tree Protection Event")
 row:Right():Toggle({
-    Value = Config["Auto Farm Agony"] or false,
+    Value = Config["Auto Tree Protection Event"] or false,
     ValueChanged = function(self, value)
-        Config["Auto Farm Agony"] = value
+        Config["Auto Tree Protection Event"] = value
         getgenv()['Update_Setting'](getgenv()['MyName'])
-        _St(Config["Auto Farm Agony"])
+        _St(Config["Auto Tree Protection Event"])
     end,
 })
-row = titledRow(form, "Auto Farm Ashen")
+row = titledRow(form, "Auto Farm Boss Event")
 row:Right():Toggle({
-    Value = Config["Auto Farm Ashen"] or false,
+    Value = Config["Auto Farm Boss Event"] or false,
     ValueChanged = function(self, value)
-        Config["Auto Farm Ashen"] = value
+        Config["Auto Farm Boss Event"] = value
         getgenv()['Update_Setting'](getgenv()['MyName'])
-        _St(Config["Auto Farm Ashen"])
-    end,
-})
-row = titledRow(form, "Auto Farm Lightning Bandit")
-row:Right():Toggle({
-    Value = Config["Auto Farm Lightning Bandit"] or false,
-    ValueChanged = function(self, value)
-        Config["Auto Farm Lightning Bandit"] = value
-        getgenv()['Update_Setting'](getgenv()['MyName'])
-        _St(Config["Auto Farm Lightning Bandit"])
+        _St(Config["Auto Farm Boss Event"])
     end,
 })
 row = titledRow(form, "Teleport to Normal World")
@@ -14407,6 +14430,152 @@ row:Right():Toggle({
     end,
 })
 local IslandList
+IslandList = 'None'
+form = Tabs.Location:PageSection({ Title = "Teleport to Island" }):Form()
+row = titledRow(form, "Tween Island","After selecting an island, the system will use Tween movement (smooth transition travel) instead of instant teleport. This makes movement look more natural and safer.")
+row:Right():Toggle({
+    Value = Config["Tween Island"] or false,
+    ValueChanged = function(self, value)
+        Config["Tween Island"] = value
+        getgenv()['Update_Setting'](getgenv()['MyName'])
+        _St(Config["Tween Island"])
+    end,
+})
+form = Tabs.Location:PageSection({ Title = "World Sections" }):Form()
+row = titledRow(form, "Teleport to East Blue")
+row:Right():Button({
+    Label = "Click here!",
+    State = "Primary",
+    Pushed = function(self)
+        local args = {
+            [1] = "TravelMain"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end,
+})
+row = titledRow(form, "Teleport to Dressrosa")
+row:Right():Button({
+    Label = "Click here!",
+    State = "Primary",
+    Pushed = function(self)
+        local args = {
+            [1] = "TravelDressrosa"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end,
+})
+row = titledRow(form, "Teleport to Zou")
+row:Right():Button({
+    Label = "Click here!",
+    State = "Primary",
+    Pushed = function(self)
+        local args = {
+            [1] = "TravelZou"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end,
+})
+form = Tabs.Esp:PageSection({ Title = "Esp" }):Form()
+row = titledRow(form, "ESP Island")
+row:Right():Toggle({
+    Value = Config["ESP Island"] or false,
+    ValueChanged = function(self, value)
+        IslandESP = value
+        Config["ESP Island"] = value
+        getgenv()['Update_Setting'](getgenv()['MyName'])
+        UpdateIslandESP()
+    end,
+})
+row = titledRow(form, "ESP Players")
+row:Right():Toggle({
+    Value = Config["ESP Players"] or false,
+    ValueChanged = function(self, value)
+        ESPPlayer = value
+        Config["ESP Players"] = value
+        getgenv()['Update_Setting'](getgenv()['MyName'])
+        UpdatePlayerChams()
+    end,
+})
+row = titledRow(form, "ESP Chest")
+row:Right():Toggle({
+    Value = Config["ESP Chest"] or false,
+    ValueChanged = function(self, value)
+        ChestESP = value
+        Config["ESP Chest"] = value
+        getgenv()['Update_Setting'](getgenv()['MyName'])
+        UpdateChestChams()
+    end,
+})
+row = titledRow(form, "ESP Devil Fruit")
+row:Right():Toggle({
+    Value = Config["ESP Devil Fruit"] or false,
+    ValueChanged = function(self, value)
+        DevilFruitESP = value
+        Config["ESP Devil Fruit"] = value
+        getgenv()['Update_Setting'](getgenv()['MyName'])
+        UpdateDevilChams()
+    end,
+})
+row = titledRow(form, "ESP Real Fruit")
+row:Right():Toggle({
+    Value = Config["ESP Real Fruit"] or false,
+    ValueChanged = function(self, value)
+        RealFruitESP = value
+        Config["ESP Real Fruit"] = value
+        getgenv()['Update_Setting'](getgenv()['MyName'])
+        UpdateRealFruitChams()
+    end,
+})
+row = titledRow(form, "ESP Flower")
+row:Right():Toggle({
+    Value = Config["ESP Flower"] or false,
+    ValueChanged = function(self, value)
+        FlowerESP = value
+        Config["ESP Flower"] = value
+        getgenv()['Update_Setting'](getgenv()['MyName'])
+        UpdateFlowerChams()
+    end,
+})
+row = titledRow(form, "ESP Mirage Island")
+row:Right():Toggle({
+    Value = Config["ESP Mirage Island"] or false,
+    ValueChanged = function(self, value)
+        MirageIslandESP = value
+        Config["ESP Mirage Island"] = value
+        getgenv()['Update_Setting'](getgenv()['MyName'])
+        UpdateIslandMirageESP()
+    end,
+})
+row = titledRow(form, "ESP Advanced Fruit Dealer")
+row:Right():Toggle({
+    Value = Config["ESP Advanced Fruit Dealer"] or false,
+    ValueChanged = function(self, value)
+        AfdESP = value
+        Config["ESP Advanced Fruit Dealer"] = value
+        getgenv()['Update_Setting'](getgenv()['MyName'])
+        UpdateAfdESP()
+    end,
+})
+row = titledRow(form, "ESP Prehistoric Island")
+row:Right():Toggle({
+    Value = Config["ESP Prehistoric Island"] or false,
+    ValueChanged = function(self, value)
+        PrehistoricESP = value
+        Config["ESP Prehistoric Island"] = value
+        getgenv()['Update_Setting'](getgenv()['MyName'])
+        UpdateIslandPrehistoricESP()
+    end,
+})
+row = titledRow(form, "ESP Kitsune Island")
+row:Right():Toggle({
+    Value = Config["ESP Kitsune Island"] or false,
+    ValueChanged = function(self, value)
+        KitsuneIslandEsp = value
+        Config["ESP Kitsune Island"] = value
+        getgenv()['Update_Setting'](getgenv()['MyName'])
+        UpdateIslandKisuneESP()
+    end,
+})
 form = Tabs.Dungeons:PageSection({ Title = "Riads" }):Form()
 local Chips = { "Flame", "Ice", "Quake", "Light", "Dark", "Spider", "Rumble", "Magma", "Buddha", "Sand", "Phoenix",
     "Dough" }
@@ -14473,7 +14642,7 @@ row:Right():Button({
         local args = {
             [1] = "RaidsNpc",
             [2] = "Select",
-            [3] = getgenv().Config["Select Chip Raid"]
+            [3] = Config["Select Chip Raid"]
         }
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
     end,
