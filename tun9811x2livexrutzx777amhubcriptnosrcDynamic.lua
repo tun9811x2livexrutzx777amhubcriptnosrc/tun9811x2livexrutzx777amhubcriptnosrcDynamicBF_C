@@ -10969,74 +10969,6 @@ task.spawn(function()
         end)
     end
 end)
-row = titledRow(form, "Gun No Cooldown Mode","No cooldown for gun")
-if math.random(1, 2) == downpress then
-local popUpButton = row:Right():PopUpButton({
-    Options = { "Fast", "Super (Risk)" },
-    Value =  (function()
-        for i, v in ipairs({ "Fast", "Super (Risk)" }) do
-            if v == Config["Gun No Cooldown Mode"] then
-                return i
-            end
-        end
-        return 1
-    end)(),
-    ValueChanged = function(self, value)
-        _G['Gun No Cooldown Mode'] = self.Options[value]
-        Config["Gun No Cooldown Mode"] = self.Options[value]
-        getgenv()['Update_Setting'](getgenv()['MyName'])
-    end,
-})
-else
-row:Right():PullDownButton({
-    Options = { "Fast", "Super (Risk)" },
-    Label = "N/A",
-    Multi = false,
-    Selected = "Gun No Cooldown Mode",
-    ValueLabel = 2,
-    Value = (function()
-        for i, v in ipairs({ "Fast", "Super (Risk)" }) do
-            if v == Config["Gun No Cooldown Mode"] then
-                return i
-            end
-        end
-        return 1
-    end)(),
-    ValueChanged = function(self, value)
-        local names = self.Selected
-        if self.Multi then
-            if self.ValueLabel == 1 then
-                _G["selected" .. names] = {}
-                for _, i in ipairs(value) do
-                    table.insert(_G["selected" .. names], self.Options[i])
-                end
-                if #_G["selected" .. names] == 0 then
-                    self.Label = "N/A"
-                elseif #_G["selected" .. names] == 1 then
-                    self.Label = _G["selected" .. names][1]
-                else
-                    self.Label = _G["selected" .. names][1] .. ", ..."
-                end
-            else
-                _G["selected" .. names] = {}
-                for _, i in ipairs(value) do
-                    table.insert(_G["selected" .. names], self.Options[i])
-                end
-                if #_G["selected" .. names] == 0 then
-                    self.Label = "N/A"
-                else
-                    self.Label = table.concat(_G["selected" .. names], ", ")
-                end
-            end
-        else
-            self.Label = self.Options[value] or "N/A"
-        end
-        _G['Gun No Cooldown Mode'] = self.Options[value]
-        Config["Gun No Cooldown Mode"] = self.Options[value]
-        getgenv()['Update_Setting'](getgenv()['MyName'])
-    end,
-})
-end
 row = titledRow(form, "Fast Attack","quick attack")
 row:Right():Toggle({
     Value = Config["Fast Attack"] or true,
@@ -11999,7 +11931,7 @@ while task.wait() do
 end
 end)
 ]]
-GetWeaponData = require(game:GetService("ReplicatedStorage").Modules.CombatUtil):GetWeaponData("Slingshot")
+--[[ GetWeaponData = require(game:GetService("ReplicatedStorage").Modules.CombatUtil):GetWeaponData("Slingshot")
 GetWeaponData1 = require(game:GetService("ReplicatedStorage").Modules.CombatUtil):GetWeaponData("Flintlock")
 GetWeaponData2 = require(game:GetService("ReplicatedStorage").Modules.CombatUtil):GetWeaponData("Musket")
 GetWeaponData3 = require(game:GetService("ReplicatedStorage").Modules.CombatUtil):GetWeaponData("Acidum Rifle")
@@ -12078,7 +12010,7 @@ spawn(function()
             GetWeaponData13.Cooldown = 1.5
         end
     end
-end)
+end) *]]
 row = titledRow(form, "Auto Haki","Automatic Haki")
 row:Right():Toggle({
     Value = Config["Auto Haki"] or true,
